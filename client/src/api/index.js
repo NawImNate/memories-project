@@ -7,6 +7,8 @@ const API = axios.create({
 //should I change this ^^^ to my Heroku project url? the backend deployment url?
 //https://myfirstmemories-project.herokuapp.com/
 
+// for testing purposes connecting to localhost: "http://localhost:5000/"
+
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
     req.headers.Authorization = `Bearer ${
@@ -18,7 +20,15 @@ API.interceptors.request.use((req) => {
 
 // const url = "https://myfirstmemories-project.herokuapp.com/posts";
 
-export const fetchPosts = () => API.get("/posts");
+export const fetchPost = (id) => API.get(`/posts/${id}`);
+
+export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
+export const fetchPostsBySearch = (searchQuery) =>
+  API.get(
+    `/posts/search?searchQuery=${searchQuery.search || "none"}&tags=${
+      searchQuery.tags
+    }`
+  );
 export const createPost = (newPost) => API.post("/posts", newPost);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 export const updatePost = (id, updatedPost) =>
