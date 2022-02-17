@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://myfirstmemories-project.herokuapp.com/",
+  baseURL: "http://localhost:5000/",
 });
 
 //should I change this ^^^ to my Heroku project url? the backend deployment url?
